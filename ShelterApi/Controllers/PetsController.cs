@@ -17,9 +17,22 @@ namespace ShelterApi.Controllers
 
         // GET api/pets
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pet>>> Get()
+        public async Task<ActionResult<IEnumerable<Pet>>> Get(string species, string name)
         {
-        return await _db.Pets.ToListAsync();
+            IQueryable<Pet> query = _db.Pets.AsQueryable();
+
+            if (species != null)
+            {
+                query = query.Where(entry => entry.Species == species);
+            }
+
+            if (name != null)
+            {
+                query = query.Where(entry => entry.Name == name);
+            }
+
+
+        return await query.ToListAsync();
         }
 
         // GET: api/Pets/{id}
@@ -43,6 +56,56 @@ namespace ShelterApi.Controllers
         _db.Pets.Add(pet);
         await _db.SaveChangesAsync();
         return CreatedAtAction(nameof(GetPet), new { id = pet.PetId }, pet);
+        }
+
+        // PUT: api/Pets/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, Pet pet)
+        {
+        if (id != pet.PetId)
+        {
+            return BadRequest();
+        }
+
+        _db.Pets.Update(pet);
+
+        try
+        {
+            await _db.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!PetExists(id))
+            {
+            return NotFound();
+            }
+            else
+            {
+            throw;
+            }
+        }
+
+        return NoContent();
+        }
+
+        private bool PetExists(int id)
+        {
+        return _db.Pets.Any(e => e.PetId == id);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePet(int id)
+        {
+        Pet pet = await _db.Pets.FindAsync(id);
+        if (pet == null)
+        {
+            return NotFound();
+        }
+
+        _db.Pets.Remove(pet);
+        await _db.SaveChangesAsync();
+
+        return NoContent();
         }
     }
 }
