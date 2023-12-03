@@ -14,7 +14,8 @@ namespace ShelterApi.Models
         {
             builder.Entity<Pet>()
                 .HasData(
-                new Pet { PetId = 1, Name = "Leonard", Species = "Ball Python", Age = 3 }
+                new Pet { PetId = 1, Name = "Leonard", Species = "Ball Python", Age = 3 },
+                new Pet { PetId = 1, Name = "Strawberry", Species = "Tarantula", Age = 2 }
                 );
         }
     }

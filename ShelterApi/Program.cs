@@ -1,9 +1,9 @@
 using ShelterApi.Models;
 using Microsoft.EntityFrameworkCore;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://*:8080"); 
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ShelterApiContext>(
                     dbContextOptions => dbContextOptions
@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ShelterApiContext>(
                     )
                 );
 
-builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -29,6 +29,8 @@ else
 {
     app.UseHttpsRedirection();
 }
+
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
