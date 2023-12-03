@@ -63,7 +63,7 @@ dotnet tool install --global dotnet-ef --version 6.0.0
 9. Use your program of choice to make API calls. In your API calls, use the domain _http://localhost:5000_. 
 
 ## API Documentation
-- [API Documentation]()
+- [API Documentation](https://github.com/KariVigna/ShelterApi/blob/main/ApiDocumentation.md)
 
 ## Known Bugs
 - 
