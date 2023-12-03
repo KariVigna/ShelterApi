@@ -10,17 +10,12 @@ namespace ShelterApi.Models
         {
         }
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        builder.Entity<Pet>()
-            .HasData(
-            new Pet { PetId = 1, Name = "Leonard", Species = "Ball Python", Age = 3 }
-            );
-    }
-
-        internal object GetPets(PagedParameters petParameters)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            throw new NotImplementedException();
+            builder.Entity<Pet>()
+                .HasData(
+                new Pet { PetId = 1, Name = "Leonard", Species = "Ball Python", Age = 3 }
+                );
         }
     }
 }

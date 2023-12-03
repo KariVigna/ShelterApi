@@ -1,7 +1,9 @@
 using ShelterApi.Models;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseUrls("http://*:8080"); 
 
 builder.Services.AddDbContext<ShelterApiContext>(
                     dbContextOptions => dbContextOptions
