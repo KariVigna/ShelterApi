@@ -26,12 +26,20 @@ namespace ShelterApi.Models
             this.AddRange(items);
         }
 
-        public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
-        {
-            var count = await source.CountAsync();
-            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
-            return new PagedList<T>(items, count, pageIndex, pageSize);
-        }
+//         public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
+//         {
+//             var count = await source.CountAsync();
+//             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+//             return new PagedList<T>(items, count, pageIndex, pageSize);
+//         }
+
+        // public static PagedList<T> ToPagedList(IQueryable<T> source, int pageNumber, int pageSize)
+        // {
+        //     var count = source.Count();
+        //     var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+        //     return new PagedList<T>(items, count, pageNumber, pageSize);
+        // }
     }
 }
 
